@@ -1,17 +1,20 @@
-import { Outlet, ScrollRestoration } from "react-router";
-import { Toaster } from "../ui/toast";
+import { auth } from "@/config/firebase";
+import { Navigate, useLocation, useNavigation } from "react-router";
 
 export default function Root() {
-  return (
-    <div className="flex min-h-dvh flex-col">
-      <h1>Header</h1>
-      <main className="flex-1">
-        <Outlet />
-        <ScrollRestoration />
-      </main>
-      <div>Footer</div>
+  const { pathname } = useLocation();
+  const navigation = useNavigation();
+  const isNavigating = Boolean(navigation.location);
 
-      <Toaster />
-    </div>
+  if (isNavigating) {
+    return <div>Loading...</div>;
+  }
+
+  const user = auth.currentUser;
+
+  return user ? (
+    <Navigate to="/dashboard" replace={true} />
+  ) : (
+    <Navigate to="/auth" replace={true} state={{ from: pathname }} />
   );
 }
