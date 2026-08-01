@@ -5,7 +5,7 @@ export default function AuthLayout() {
   const user = auth.currentUser;
 
   return !user ? (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh flex-col bg-[url('/images/login-page.svg')] bg-cover bg-center">
       <h1>Header</h1>
       <main className="flex-1">
         <Outlet />
