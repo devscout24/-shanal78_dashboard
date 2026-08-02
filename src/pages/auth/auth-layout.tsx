@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 import { auth } from "@/config/firebase";
 import { Navigate, Outlet, ScrollRestoration } from "react-router";
@@ -12,7 +13,7 @@ export default function AuthLayout() {
         <Outlet />
         <ScrollRestoration />
       </main>
-      <div>Footer</div>
+      <Footer />
     </div>
   ) : (
     <Navigate to="/dashboard" replace={true} />
