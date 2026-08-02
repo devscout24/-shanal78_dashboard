@@ -12,6 +12,8 @@ export default function Root() {
 
   const user = auth.currentUser;
 
+  console.log("🚀 ~ root.tsx:15 ~ Root ~ user:", user);
+
   return user ? (
     <Navigate to="/dashboard" replace={true} />
   ) : (
