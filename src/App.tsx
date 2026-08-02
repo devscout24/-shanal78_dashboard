@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/dashboard" />,
+        element: <Navigate to="dashboard" />,
       },
       {
         path: "dashboard",

@@ -6,8 +6,6 @@ import { Navigate, Outlet, ScrollRestoration } from "react-router";
 export default function AuthLayout() {
   const user = auth.currentUser;
 
-  console.log("🚀 ~ auth-layout.tsx:9 ~ AuthLayout ~ user:", user);
-
   return !user ? (
     <div className="flex min-h-dvh flex-col bg-[url('/images/login-page.svg')] bg-cover">
       <Header />

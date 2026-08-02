@@ -1,5 +1,5 @@
 import { auth } from "@/config/firebase";
-import { Navigate, useLocation, useNavigation } from "react-router";
+import { Navigate, Outlet, useLocation, useNavigation } from "react-router";
 
 export default function Root() {
   const { pathname } = useLocation();
@@ -12,10 +12,8 @@ export default function Root() {
 
   const user = auth.currentUser;
 
-  console.log("🚀 ~ root.tsx:15 ~ Root ~ user:", user);
-
   return user ? (
-    <Navigate to="/dashboard" replace={true} />
+    <Outlet />
   ) : (
     <Navigate to="/auth" replace={true} state={{ from: pathname }} />
   );
