@@ -106,3 +106,28 @@ export const forgotPassword = async ({ request }: { request: Request }) => {
     return toast.error(errorMessage);
   }
 };
+
+export const sendMessage = async ({ request }: { request: Request }) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    if (!credentials.message) {
+      throw new Error("Message is required field!");
+    }
+
+    // Perform message sending logic here
+    console.log("Message sent:", credentials);
+
+    // Redirect to a success page or show a success message
+    toast.success("Message sent successfully!");
+    return redirect("/compliance-chat");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while sending the message.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};

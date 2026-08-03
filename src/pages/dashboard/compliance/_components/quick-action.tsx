@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import ChatForm from "./chat-form";
 
 export default function QuickAction() {
   return (
@@ -19,13 +20,13 @@ export default function QuickAction() {
           className="ring-ring font-sm h-11 cursor-pointer font-normal ring"
         >
           Employee handbook policy guide
-        </Button>{" "}
+        </Button>
         <Button
           variant="outline"
           className="ring-ring font-sm h-11 cursor-pointer font-normal ring"
         >
           Employee rights and protections
-        </Button>{" "}
+        </Button>
         <Button
           variant="outline"
           className="ring-ring font-sm h-11 cursor-pointer font-normal ring"
@@ -33,6 +34,8 @@ export default function QuickAction() {
           Benefits compliance
         </Button>
       </div>
+
+      <ChatForm />
     </div>
   );
 }
