@@ -1,37 +1,30 @@
-"use client";
+import type { CSSProperties, MouseEventHandler } from "react";
 import { ReactSVG } from "react-svg";
 
 interface IconProps {
   className?: string;
-  style?: React.CSSProperties;
-  onClick?: React.MouseEventHandler<SVGSVGElement>;
+  style?: CSSProperties;
+  onClick?: MouseEventHandler<Element>;
   src: string;
 }
 
-const Icon: React.FC<IconProps> = ({
-  src,
-  className,
-  style,
-  onClick,
-}: IconProps) => {
+const Icon = ({ src, className, style, onClick }: IconProps) => {
   return (
     <ReactSVG
       src={src}
       beforeInjection={(svg) => {
+        svg.removeAttribute("width");
+        svg.removeAttribute("height");
         if (className) {
           className.split(" ").forEach((cls) => {
             if (cls) svg.classList.add(cls);
           });
         }
         if (style) Object.assign(svg.style, style);
-        if (onClick)
-          svg.addEventListener("click", (e) =>
-            onClick(
-              e as unknown as React.MouseEvent<SVGSVGElement, MouseEvent>,
-            ),
-          );
       }}
       wrapper="span"
+      style={{ display: "flex" }}
+      onClick={onClick as MouseEventHandler<Element>}
     />
   );
 };

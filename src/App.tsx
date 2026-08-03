@@ -9,7 +9,8 @@ import AuthLayout from "./pages/auth/auth-layout";
 import ForgotPassword from "./pages/auth/forgot-password";
 import Login from "./pages/auth/login";
 import Signup from "./pages/auth/signup";
-import DashboardLayout from "./pages/dashboard/dashboard-layout";
+import Compliance from "./pages/dashboard/compliance";
+import Home from "./pages/dashboard/home";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +21,16 @@ const router = createBrowserRouter([
     loader: loadUser,
     children: [
       {
-        index: true,
-        element: <Navigate to="dashboard" />,
+        path: "/",
+        element: <Home />,
       },
       {
-        path: "dashboard",
-        element: <DashboardLayout />,
+        path: "compliance-chat",
+        element: <Compliance />,
         children: [
           {
-            index: true,
-            element: <div>Dashboard</div>,
+            path: ":id",
+            element: <div>Compliance Chat</div>,
           },
         ],
       },

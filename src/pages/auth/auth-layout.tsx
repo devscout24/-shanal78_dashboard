@@ -16,6 +16,6 @@ export default function AuthLayout() {
       <Footer />
     </div>
   ) : (
-    <Navigate to="/dashboard" replace={true} />
+    <Navigate to="/" replace={true} />
   );
 }
