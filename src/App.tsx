@@ -3,9 +3,10 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { Toaster } from "sonner";
 import Root from "./components/shared/root";
-import { login, register } from "./lib/action";
+import { forgotPassword, login, register } from "./lib/action";
 import { loadUser, loginWithGoogle } from "./lib/loader";
 import AuthLayout from "./pages/auth/auth-layout";
+import ForgotPassword from "./pages/auth/forgot-password";
 import Login from "./pages/auth/login";
 import Signup from "./pages/auth/signup";
 import DashboardLayout from "./pages/dashboard/dashboard-layout";
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
         path: "register",
         element: <Signup />,
         action: register,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+        action: forgotPassword,
       },
       {
         path: "login-with-google",

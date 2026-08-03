@@ -84,7 +84,7 @@ export default function Login() {
 
           <Button
             type="submit"
-            className="from-primary to-secondary my-5 h-11 w-full cursor-pointer rounded-[10px] bg-linear-to-r px-6 py-3 font-sans text-sm leading-5 font-semibold text-white shadow-xl"
+            className="from-primary to-secondary shadow-blue my-5 h-11 w-full cursor-pointer rounded-[10px] bg-linear-to-r px-6 py-3 font-sans text-sm leading-5 font-semibold text-white"
             disabled={fetcher.state === "submitting"}
           >
             Login

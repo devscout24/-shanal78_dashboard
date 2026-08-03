@@ -97,3 +97,7 @@
     @apply font-sans;
   }
 }
+
+@theme {
+  --shadow-blue: 0 8px 24px -6px rgba(17, 29, 116, 0.35);
+}
