@@ -19,6 +19,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import UserManagement from "./pages/user-management";
+import Profile from "./pages/user-management/profile";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            element: <div>Profile</div>,
+            element: <Profile />,
           },
           {
             path: "password",
