@@ -11,7 +11,7 @@ export default function UserManagement() {
         <Sidebar />
       </AppSidebar>
 
-      <SidebarInset className="bg-[url('/images/dashboard.jpg')] bg-cover">
+      <SidebarInset className="bg-[url('/images/dashboard.jpg')] bg-cover p-8">
         <Outlet />
       </SidebarInset>
     </DashboardLayout>

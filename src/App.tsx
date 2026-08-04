@@ -9,6 +9,7 @@ import {
   register,
   sendMessage,
   sendNewMessage,
+  updateProfileInfo,
 } from "./lib/action";
 import { loadUser, loginWithGoogle, messages } from "./lib/loader";
 import AuthLayout from "./pages/auth/auth-layout";
@@ -19,6 +20,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import UserManagement from "./pages/user-management";
+import Password from "./pages/user-management/password";
 import Profile from "./pages/user-management/profile";
 
 const router = createBrowserRouter([
@@ -57,10 +59,11 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+            action: updateProfileInfo,
           },
           {
             path: "password",
-            element: <div>Password</div>,
+            element: <Password />,
           },
           {
             path: "billing",
