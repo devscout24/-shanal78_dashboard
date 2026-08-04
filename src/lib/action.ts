@@ -176,3 +176,36 @@ export const sendMessage = async ({ request, params }: ActionFunctionArgs) => {
     return toast.error(errorMessage);
   }
 };
+
+export const updateProfileInfo = async ({ request }: ActionFunctionArgs) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    Object.keys(credentials).forEach((field) => {
+      if (!credentials[field]) {
+        throw new Error(`${field} is required field!`);
+      }
+    });
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("No authenticated user found");
+    }
+
+    await updateProfile(user, {
+      displayName: `${credentials["first-name"]} ${credentials["last-name"]}`,
+    });
+
+    toast.success("Profile updated successfully!");
+    return redirect("/user-management/profile");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while updating the profile.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};
