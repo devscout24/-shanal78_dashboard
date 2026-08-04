@@ -2,22 +2,15 @@ import Icon from "@/components/shared/Icon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useRef } from "react";
-import { useFetcher } from "react-router";
+import { useFetcher, useParams } from "react-router";
 
 export default function ChatForm() {
+  const { id } = useParams();
   const fetcher = useFetcher();
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (fetcher.state === "idle" && fetcher.data) {
-      formRef.current?.reset();
-    }
-  }, [fetcher.state, fetcher.data]);
 
   return (
-    <div className="ring-ring mt-6 w-full rounded-[16px] p-5 ring-2">
-      <fetcher.Form ref={formRef} method="post" action="/compliance-chat">
+    <div className="ring-ring mt-2 w-full rounded-[16px] bg-white p-5 ring-1">
+      <fetcher.Form method="post" action={`/compliance-chat/${id}`}>
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <fieldset>

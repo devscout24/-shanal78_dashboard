@@ -3,13 +3,20 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { Toaster } from "sonner";
 import Root from "./components/shared/root";
-import { forgotPassword, login, register, sendMessage } from "./lib/action";
-import { loadUser, loginWithGoogle } from "./lib/loader";
+import {
+  forgotPassword,
+  login,
+  register,
+  sendMessage,
+  sendNewMessage,
+} from "./lib/action";
+import { loadUser, loginWithGoogle, messages } from "./lib/loader";
 import AuthLayout from "./pages/auth/auth-layout";
 import ForgotPassword from "./pages/auth/forgot-password";
 import Login from "./pages/auth/login";
 import Signup from "./pages/auth/signup";
 import Compliance from "./pages/dashboard/compliance";
+import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 
 const router = createBrowserRouter([
@@ -27,11 +34,13 @@ const router = createBrowserRouter([
       {
         path: "compliance-chat",
         element: <Compliance />,
-        action: sendMessage,
+        action: sendNewMessage,
         children: [
           {
             path: ":id",
-            element: <div>Compliance Chat</div>,
+            element: <Chat />,
+            loader: messages,
+            action: sendMessage,
           },
         ],
       },

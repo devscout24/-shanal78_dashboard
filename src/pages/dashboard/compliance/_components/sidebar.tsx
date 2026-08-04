@@ -1,17 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { SidebarGroupContent } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export default function Sidebar() {
   return (
     <>
-      <Button className="from-primary to-secondary shadow-blue h-11 w-[111.797px] cursor-pointer rounded-full bg-linear-to-r p-3 font-mono text-sm leading-5 font-semibold">
-        <span>+</span>
-        <span>New Chat</span>
-      </Button>
+      <Link to="/compliance-chat" className="w-full">
+        <Button className="from-primary to-secondary shadow-blue h-11 w-[111.797px] cursor-pointer rounded-full bg-linear-to-r p-3 font-mono text-sm leading-5 font-semibold">
+          <span>+</span>
+          <span>New Chat</span>
+        </Button>
+      </Link>
 
-      <SidebarGroupContent className="space-y-4">
+      <SidebarGroupContent className="mt-3 space-y-4">
         <h4 className="text-muted-foreground font-mono text-xs leading-4.5 font-semibold tracking-[0.96px] uppercase">
           RECENT CHATS
         </h4>

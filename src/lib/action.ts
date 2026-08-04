@@ -5,10 +5,10 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { redirect } from "react-router";
+import { redirect, type ActionFunctionArgs } from "react-router";
 import { toast } from "sonner";
 
-export const login = async ({ request }: { request: Request }) => {
+export const login = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const searchTerm = url.searchParams.get("from") || "/";
   try {
@@ -41,7 +41,7 @@ export const login = async ({ request }: { request: Request }) => {
   }
 };
 
-export const register = async ({ request }: { request: Request }) => {
+export const register = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const searchTerm = url.searchParams.get("from") || "/";
   try {
@@ -80,7 +80,7 @@ export const register = async ({ request }: { request: Request }) => {
   }
 };
 
-export const forgotPassword = async ({ request }: { request: Request }) => {
+export const forgotPassword = async ({ request }: ActionFunctionArgs) => {
   try {
     const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
@@ -107,7 +107,7 @@ export const forgotPassword = async ({ request }: { request: Request }) => {
   }
 };
 
-export const sendMessage = async ({ request }: { request: Request }) => {
+export const sendNewMessage = async ({ request }: ActionFunctionArgs) => {
   try {
     const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
@@ -119,9 +119,32 @@ export const sendMessage = async ({ request }: { request: Request }) => {
     // Perform message sending logic here
     console.log("Message sent:", credentials);
 
-    // Redirect to a success page or show a success message
-    toast.success("Message sent successfully!");
-    return redirect("/compliance-chat");
+    return redirect("/compliance-chat/2");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while sending the message.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};
+
+export const sendMessage = async ({ request, params }: ActionFunctionArgs) => {
+  try {
+    if (!params.id) throw new Error("No id provided");
+
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    if (!credentials.message) {
+      throw new Error("Message is required field!");
+    }
+
+    // Perform message sending logic here
+    console.log("Message sent:", credentials);
+
+    return redirect(`/compliance-chat/${params.id}`);
   } catch (error) {
     const errorMessage =
       error instanceof Error
