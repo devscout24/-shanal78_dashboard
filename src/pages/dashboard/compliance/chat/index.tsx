@@ -1,3 +1,4 @@
+import { Attachment, AttachmentMedia } from "@/components/ui/attachment";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import {
@@ -47,11 +48,22 @@ export default function Chat() {
                   </Avatar>
                 </MessageAvatar>
                 <MessageContent>
-                  <Bubble
-                    variant={message.sender === "user" ? "default" : "muted"}
-                  >
-                    <BubbleContent>{message.content}</BubbleContent>
-                  </Bubble>
+                  {message.content.map((content, index) => (
+                    <Bubble
+                      key={index}
+                      variant={message.sender === "user" ? "default" : "muted"}
+                    >
+                      <BubbleContent>{content}</BubbleContent>
+                    </Bubble>
+                  ))}
+
+                  {message.attachments?.map((attachment) => (
+                    <Attachment key={attachment.id} orientation="vertical">
+                      <AttachmentMedia variant="image">
+                        <img src={attachment.url} alt="Workspace" />
+                      </AttachmentMedia>
+                    </Attachment>
+                  ))}
                 </MessageContent>
               </Message>
             ))}

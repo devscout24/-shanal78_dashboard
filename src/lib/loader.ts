@@ -77,7 +77,11 @@ export const messages = async ({
 
     const messages: IMessage[] = Array.from({ length: 20 }, () => ({
       id: faker.string.uuid(),
-      content: faker.lorem.sentence(),
+      content: Array.from({ length: 5 }, () => faker.lorem.sentence()),
+      attachments: Array.from({ length: 2 }, () => ({
+        id: faker.string.uuid(),
+        url: faker.image.urlLoremFlickr({ category: "nature" }),
+      })),
       sender: faker.helpers.arrayElement(["user", "bot"]),
       user: {
         id: faker.string.uuid(),
