@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFetcher, useParams } from "react-router";
+import PrePrompt from "./pre-prompt";
 
 export default function ChatForm() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function ChatForm() {
           <div className="flex-1">
             <fieldset>
               <Input
-                placeholder="Start typing..."
+                placeholder="Reply to A2HR..."
                 className="placeholder:text-muted-foreground h-11 rounded-[10px] border-2 px-3.5 py-2.5 font-sans text-sm placeholder:font-sans placeholder:text-sm"
                 type="message"
                 name="message"
@@ -34,18 +35,7 @@ export default function ChatForm() {
 
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              className="cursor-pointer bg-[#E6F8FA] text-[#02519E]"
-            >
-              Help me write my prompt
-            </Button>
-            <Button
-              variant="secondary"
-              className="text-foreground cursor-pointer bg-[#F2F4F7]"
-            >
-              Ask a Question
-            </Button>
+            <PrePrompt id={id!} message="Help me write my prompt" />
           </div>
 
           <fieldset>

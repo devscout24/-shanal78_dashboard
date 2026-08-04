@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useRef } from "react";
 import { useFetcher } from "react-router";
+import PrePrompt from "./pre-prompt";
 
 export default function ChatForm() {
   const fetcher = useFetcher();
@@ -41,18 +42,11 @@ export default function ChatForm() {
 
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              className="cursor-pointer bg-[#E6F8FA] text-[#02519E]"
-            >
-              Help me write my prompt
-            </Button>
-            <Button
-              variant="secondary"
-              className="text-foreground cursor-pointer bg-[#F2F4F7]"
-            >
-              Ask a Question
-            </Button>
+            <PrePrompt message="Help me write my prompt" />
+            <PrePrompt
+              message="Help me write my prompt"
+              className="text-foreground bg-[#F2F4F7]"
+            />
           </div>
 
           <fieldset>
