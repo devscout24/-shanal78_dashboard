@@ -15,21 +15,4 @@ export default defineConfig({
       "@": resolve(import.meta.dirname, "./src"),
     },
   },
-
-  server: {
-    proxy: {
-      "/data-team": {
-        target: "https://data.according2hr.com",
-        // changeOrigin: true,
-      },
-      // "/messages": {
-      //   target: "https://data-team-service-1087487272136.us-east1.run.app",
-      //   changeOrigin: true,
-      // },
-      // "/compliance": {
-      //   target: "https://data-team-service-1087487272136.us-east1.run.app",
-      //   changeOrigin: true,
-      // },
-    },
-  },
 });

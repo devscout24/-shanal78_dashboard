@@ -18,6 +18,7 @@ import Signup from "./pages/auth/signup";
 import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
+import UserManagement from "./pages/user-management";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,32 @@ const router = createBrowserRouter([
             element: <Chat />,
             loader: messages,
             action: sendMessage,
+          },
+        ],
+      },
+      {
+        path: "user-management",
+        element: <UserManagement />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="profile" />,
+          },
+          {
+            path: "profile",
+            element: <div>Profile</div>,
+          },
+          {
+            path: "password",
+            element: <div>Password</div>,
+          },
+          {
+            path: "billing",
+            element: <div>Billing</div>,
+          },
+          {
+            path: "notifications",
+            element: <div>Notifications</div>,
           },
         ],
       },
