@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { SidebarGroupContent } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { faker } from "@faker-js/faker";
 import { Link, NavLink } from "react-router";
 
 export default function Sidebar() {
@@ -18,21 +19,25 @@ export default function Sidebar() {
           RECENT CHATS
         </h4>
 
-        <div>
+        <div className="space-y-1">
           {conversations.map((conversation) => (
             <NavLink
               to={`/compliance-chat/${conversation.id}`}
               key={conversation.id}
               className={({ isActive }) =>
                 cn(
-                  "text-sidebar-primary-foreground line-clamp-1 font-sans text-base leading-6 font-medium",
+                  "text-sidebar-primary-foreground line-clamp-1 rounded-sm px-2 py-1 font-sans text-base leading-6 font-medium",
                   {
-                    "text-[#68a0ff]": isActive,
+                    "bg-muted": isActive,
                   },
                 )
               }
             >
-              {conversation.title}
+              {({ isActive }) => (
+                <span>
+                  {isActive && <span>●</span>} <span>{conversation.title}</span>
+                </span>
+              )}
             </NavLink>
           ))}
         </div>
@@ -41,10 +46,7 @@ export default function Sidebar() {
   );
 }
 
-const conversations = [
-  {
-    id: 1,
-    title:
-      "An Employee's Guide to Compliance: Navigating the Rules and Regulations",
-  },
-];
+const conversations = Array.from({ length: 10 }, () => ({
+  id: faker.string.uuid(),
+  title: faker.lorem.sentence(),
+}));

@@ -109,6 +109,10 @@ export const forgotPassword = async ({ request }: ActionFunctionArgs) => {
 
 export const sendNewMessage = async ({ request }: ActionFunctionArgs) => {
   try {
+    const idToken = await auth.currentUser?.getIdToken(true); // force refresh
+
+    if (!idToken) throw new Error("Not authenticated");
+
     const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
 
@@ -116,8 +120,25 @@ export const sendNewMessage = async ({ request }: ActionFunctionArgs) => {
       throw new Error("Message is required field!");
     }
 
-    // Perform message sending logic here
-    console.log("Message sent:", credentials);
+    const response = await fetch("/data-team/chat/query", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: String(credentials.message), // API expects "query" not "message"
+        products: [{ product_sku: "federal-2026" }],
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || "Failed to send message");
+    }
+
+    const data = await response.json();
+    console.log("🚀 ~ sendNewMessage ~ data:", data);
 
     return redirect("/compliance-chat/2");
   } catch (error) {
@@ -126,7 +147,8 @@ export const sendNewMessage = async ({ request }: ActionFunctionArgs) => {
         ? error.message
         : "An error occurred while sending the message.";
     console.error(error);
-    return toast.error(errorMessage);
+    toast.error(errorMessage);
+    return null;
   }
 };
 
