@@ -1,4 +1,5 @@
 import { auth } from "@/config/firebase";
+import type { Invoice } from "@/types/billing";
 import type { IMessage } from "@/types/messages";
 import { faker } from "@faker-js/faker";
 import {
@@ -91,6 +92,29 @@ export const messages = async ({
     }));
 
     return messages;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const billingHistory = async (): Promise<Invoice[]> => {
+  try {
+    // const response = await fetch("/api/billing-history");
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch billing history");
+    // }
+    // const data = await response.json();
+
+    const invoices: Invoice[] = Array.from({ length: 10 }, () => ({
+      id: faker.string.uuid(),
+      month: faker.date.month({ abbreviated: true }),
+      status: faker.helpers.arrayElement(["Paid", "Unpaid", "Overdue"]),
+      amount: parseFloat(faker.finance.amount({ min: 10, max: 100 })),
+      plan: faker.helpers.arrayElement(["Basic", "Pro", "Enterprise"]),
+    }));
+
+    return invoices;
   } catch (error) {
     console.error(error);
     return [];

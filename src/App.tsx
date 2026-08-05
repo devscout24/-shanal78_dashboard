@@ -13,7 +13,12 @@ import {
   updatePassword,
   updateProfileInfo,
 } from "./lib/action";
-import { loadUser, loginWithGoogle, messages } from "./lib/loader";
+import {
+  billingHistory,
+  loadUser,
+  loginWithGoogle,
+  messages,
+} from "./lib/loader";
 import AuthLayout from "./pages/auth/auth-layout";
 import ForgotPassword from "./pages/auth/forgot-password";
 import Login from "./pages/auth/login";
@@ -73,6 +78,7 @@ const router = createBrowserRouter([
             path: "billing",
             element: <Billing />,
             action: changePlan,
+            loader: billingHistory,
           },
           {
             path: "notifications",

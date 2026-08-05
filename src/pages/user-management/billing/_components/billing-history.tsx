@@ -7,14 +7,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { Invoice } from "@/types/billing";
 import { useState } from "react";
+import { useLoaderData } from "react-router";
 
 export default function BillingHistory() {
   const [selected, setSelected] = useState<string[]>([]);
 
+  const billings = useLoaderData();
+
   const toggleAll = () => {
     setSelected(
-      selected.length === invoices.length ? [] : invoices.map((i) => i.id),
+      selected.length === billings.length
+        ? []
+        : billings.map((i: Invoice) => i.id),
     );
   };
 
@@ -31,7 +37,7 @@ export default function BillingHistory() {
           <TableRow className="border-b border-gray-100">
             <TableHead className="w-10 px-4">
               <Checkbox
-                checked={selected.length === invoices.length}
+                checked={selected.length === billings.length}
                 onCheckedChange={toggleAll}
                 className="border-border border"
               />
@@ -52,7 +58,7 @@ export default function BillingHistory() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
+          {billings.map((invoice: Invoice) => (
             <TableRow
               key={invoice.id}
               className="border-border border-b last:border-0"
@@ -102,48 +108,3 @@ export default function BillingHistory() {
     </div>
   );
 }
-
-const invoices = [
-  {
-    id: "dec-2025",
-    month: "Dec 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-  {
-    id: "nov-2025",
-    month: "Nov 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-  {
-    id: "oct-2025",
-    month: "Oct 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-  {
-    id: "sep-2025",
-    month: "Sep 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-  {
-    id: "aug-2025",
-    month: "Aug 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-  {
-    id: "jul-2025",
-    month: "Jul 2025",
-    status: "Paid",
-    amount: "USD $10.00",
-    plan: "Basic plan",
-  },
-];
