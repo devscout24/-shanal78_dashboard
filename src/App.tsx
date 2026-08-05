@@ -28,6 +28,7 @@ import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import UserManagement from "./pages/user-management";
 import Billing from "./pages/user-management/billing";
+import Notification from "./pages/user-management/notification";
 import Password from "./pages/user-management/password";
 import Profile from "./pages/user-management/profile";
 
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
           },
           {
             path: "notifications",
-            element: <div>Notifications</div>,
+            element: <Notification />,
           },
         ],
       },
