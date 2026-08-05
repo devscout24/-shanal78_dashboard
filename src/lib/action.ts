@@ -261,3 +261,27 @@ export const updatePassword = async ({ request }: ActionFunctionArgs) => {
     return toast.error(errorMessage);
   }
 };
+
+export const changePlan = async ({ request }: ActionFunctionArgs) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    if (!credentials["id"]) {
+      throw new Error("Plan ID is required field!");
+    }
+
+    // Perform plan change logic here
+    console.log("Plan changed to:", credentials["id"]);
+
+    toast.success("Plan changed successfully!");
+    return redirect("/user-management/billing");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while changing the plan.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};

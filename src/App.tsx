@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router/dom";
 import { Toaster } from "sonner";
 import Root from "./components/shared/root";
 import {
+  changePlan,
   forgotPassword,
   login,
   register,
@@ -21,6 +22,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import UserManagement from "./pages/user-management";
+import Billing from "./pages/user-management/billing";
 import Password from "./pages/user-management/password";
 import Profile from "./pages/user-management/profile";
 
@@ -69,7 +71,8 @@ const router = createBrowserRouter([
           },
           {
             path: "billing",
-            element: <div>Billing</div>,
+            element: <Billing />,
+            action: changePlan,
           },
           {
             path: "notifications",

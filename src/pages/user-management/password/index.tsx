@@ -90,7 +90,7 @@ export default function Password() {
             </div>
           </div>
 
-          <div className="border-border mt-6 flex items-center justify-end gap-3 border-t p-6">
+          <div className="border-border flex items-center justify-end gap-3 border-t p-6">
             <Button
               variant="outline"
               className="h-10 cursor-pointer border-2 border-[#D5D7DA]! bg-white px-4 py-2 font-sans text-sm leading-5 font-semibold"
