@@ -25,12 +25,12 @@ export default function PersonalInfo() {
         </p>
       </div>
 
-      <div className="flex-1 rounded-[12px] bg-white p-6">
+      <div className="border-border flex-1 rounded-[12px] border bg-white">
         <fetcher.Form
           method="post"
           action="/user-management/profile?_action=update-personal-info"
         >
-          <div className="grid grid-cols-2 gap-6 space-y-5">
+          <div className="grid grid-cols-2 gap-6 space-y-5 p-6">
             <fieldset className="space-y-1.75">
               <Label
                 htmlFor="first-name"
@@ -136,7 +136,7 @@ export default function PersonalInfo() {
             </fieldset>
           </div>
 
-          <div className="mt-6 flex items-center justify-end gap-3">
+          <div className="border-border mt-6 flex items-center justify-end gap-3 border-t p-6">
             <Button
               variant="outline"
               className="h-10 cursor-pointer border-2 border-[#D5D7DA]! bg-white px-4 py-2 font-sans text-sm leading-5 font-semibold"

@@ -9,6 +9,7 @@ import {
   register,
   sendMessage,
   sendNewMessage,
+  updatePassword,
   updateProfileInfo,
 } from "./lib/action";
 import { loadUser, loginWithGoogle, messages } from "./lib/loader";
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
           {
             path: "password",
             element: <Password />,
+            action: updatePassword,
           },
           {
             path: "billing",

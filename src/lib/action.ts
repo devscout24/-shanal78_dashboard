@@ -1,6 +1,8 @@
 import { auth } from "@/config/firebase";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   updateProfile,
@@ -205,6 +207,56 @@ export const updateProfileInfo = async ({ request }: ActionFunctionArgs) => {
       error instanceof Error
         ? error.message
         : "An error occurred while updating the profile.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};
+
+export const updatePassword = async ({ request }: ActionFunctionArgs) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    console.log(
+      "🚀 ~ action.ts:220 ~ updatePassword ~ credentials:",
+      credentials,
+    );
+
+    Object.keys(credentials).forEach((field) => {
+      if (!credentials[field]) {
+        throw new Error(`${field} is required field!`);
+      }
+    });
+
+    if (credentials["new-password"] !== credentials["confirm-new-password"]) {
+      throw new Error("New password and confirm password do not match!");
+    }
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("No authenticated user found");
+    }
+
+    // Must reauthenticate before changing password
+    const credential = EmailAuthProvider.credential(
+      user.email || "",
+      String(credentials["current-password"]),
+    );
+
+    if (!credential) {
+      throw new Error("Failed to create credential for reauthentication");
+    }
+
+    await reauthenticateWithCredential(user, credential);
+
+    toast.success("Password updated successfully!");
+    return redirect("/user-management/password");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while updating the password.";
     console.error(error);
     return toast.error(errorMessage);
   }
