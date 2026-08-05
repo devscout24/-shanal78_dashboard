@@ -2,6 +2,7 @@ import Icon from "@/components/shared/Icon";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Search } from "lucide-react";
+import BillingHistory from "./_components/billing-history";
 import Plans from "./_components/plans";
 
 export default function Billing() {
@@ -62,6 +63,22 @@ export default function Billing() {
           <Icon src="/icons/download-cloud.svg" className="size-5" />
           <span> Download all</span>
         </Button>
+      </div>
+
+      <div className="flex w-full py-5">
+        <div className="max-w-xs">
+          <h4 className="font-sans text-sm leading-5 font-semibold">
+            Billing history
+          </h4>
+          <p className="text-muted-foreground font-sans text-sm leading-5 font-normal">
+            Please reach out to our friendly team via Shana or Jason with
+            questions.
+          </p>
+        </div>
+
+        <div className="flex-1">
+          <BillingHistory />
+        </div>
       </div>
     </>
   );
