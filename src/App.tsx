@@ -26,6 +26,8 @@ import Signup from "./pages/auth/signup";
 import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
+import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
+import Onboarding from "./pages/onboarding/state";
 import UserManagement from "./pages/user-management";
 import Billing from "./pages/user-management/billing";
 import Notification from "./pages/user-management/notification";
@@ -84,6 +86,20 @@ const router = createBrowserRouter([
           {
             path: "notifications",
             element: <Notification />,
+          },
+        ],
+      },
+      {
+        path: "onboarding",
+        element: <OnBoardingLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="state" />,
+          },
+          {
+            path: "state",
+            element: <Onboarding />,
           },
         ],
       },
