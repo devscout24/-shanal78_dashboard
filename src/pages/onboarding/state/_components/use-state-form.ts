@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
+import { useSubmit } from "react-router";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -30,6 +31,8 @@ const STATE_PRICES: Record<string, number> = {
 };
 
 export default function useOnboardingForm() {
+  const submit = useSubmit();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,7 +77,9 @@ export default function useOnboardingForm() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);
+    submit({ quizTimedOut: true }, { action: "/end-quiz", method: "post" });
   }
+
   return {
     form,
     onSubmit,

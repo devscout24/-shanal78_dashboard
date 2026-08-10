@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Field } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router";
 import StateForm from "./_components/state-form";
 
 export default function Onboarding() {
@@ -30,17 +29,20 @@ export default function Onboarding() {
                   variant="outline"
                   className="cursor-pointer rounded-none"
                   disabled
+                  type="button"
                 >
                   <Icon src="/icons/arrow-left.svg" />
                   <span>Previous</span>
                 </Button>
 
-                <Link to="/onboarding/payment">
-                  <Button className="cursor-pointer rounded-none">
-                    <span>Next</span>
-                    <Icon src="/icons/arrow-bold.svg" />
-                  </Button>
-                </Link>
+                <Button
+                  className="cursor-pointer rounded-none"
+                  form="form-onboarding"
+                  type="submit"
+                >
+                  <span>Next</span>
+                  <Icon src="/icons/arrow-bold.svg" />
+                </Button>
               </div>
             </CardAction>
             <CardContent className="w-full p-0">
