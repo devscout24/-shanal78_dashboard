@@ -3,24 +3,32 @@ import { useForm, useWatch } from "react-hook-form";
 import { useSubmit } from "react-router";
 import * as z from "zod";
 
-const formSchema = z.object({
-  states: z.array(z.string()).optional(),
-  addOn: z.boolean().optional(),
-  // name: z.string().optional(),
-  // expiry: z.string().optional(),
-  // cvv: z.string().optional(),
-  // card: z.string().optional(),
-  // emails: z.array(z.object({ value: z.email("Invalid email") })).min(1),
-  // street: z.string().optional(),
-  // city: z.string().optional(),
-  // state: z
-  //   .object({
-  //     state: z.string().optional(),
-  //     province: z.string().optional(),
-  //   })
-  //   .optional(),
-  // country: z.string().optional(),
-});
+const formSchema = z
+  .object({
+    package: z.object({
+      id: z.number(),
+      name: z.string(),
+      price: z.string(),
+      stateLimit: z.number(),
+    }),
+    states: z.array(z.string()).optional(),
+    addOn: z.boolean().optional(),
+  })
+  .refine(
+    (data) => {
+      // If states isn't provided, it's valid (or handle as needed)
+      if (!data.states) return true;
+
+      // Check if selected states exceed the package limit
+      return data.states.length <= data.package.stateLimit;
+    },
+    {
+      message:
+        "Please select states within the allowed limit for the chosen package.",
+      // This points the error message directly to the 'states' field in react-hook-form
+      path: ["states"],
+    },
+  );
 
 const STATE_PRICES: Record<string, number> = {
   Texas: 100,
@@ -30,26 +38,13 @@ const STATE_PRICES: Record<string, number> = {
   Georgia: 125,
 };
 
-export default function useOnboardingForm() {
+export default function useSelectStateForm() {
   const submit = useSubmit();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      states: [],
-      addOn: false,
-      // name: "",
-      // expiry: "",
-      // cvv: "",
-      // card: "",
-      // emails: [{ value: "" }],
-      // street: "",
-      // city: "",
-      // state: {
-      //   state: "",
-      //   province: "",
-      // },
-      // country: "",
+      package: {},
     },
   });
 

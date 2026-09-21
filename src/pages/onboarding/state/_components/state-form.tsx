@@ -18,9 +18,11 @@ const STATE_PRICES: Record<string, number> = {
   Georgia: 125,
 };
 
-export default function SelectState() {
-  const { form, onSubmit, total } = useOnboardingForm();
-
+export default function StateForm({
+  form,
+}: {
+  form: ReturnType<typeof useOnboardingForm>["form"];
+}) {
   const [tooltip, setTooltip] = useState<{
     name: string;
     x: number;
@@ -28,7 +30,7 @@ export default function SelectState() {
   } | null>(null);
 
   return (
-    <form id="form-onboarding" onSubmit={form.handleSubmit(onSubmit)}>
+    <div>
       <Controller
         name="states"
         control={form.control}
@@ -214,6 +216,6 @@ export default function SelectState() {
           </Field>
         )}
       />
-    </form>
+    </div>
   );
 }
