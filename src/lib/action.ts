@@ -285,3 +285,27 @@ export const changePlan = async ({ request }: ActionFunctionArgs) => {
     return toast.error(errorMessage);
   }
 };
+
+export const selectState = async ({ request }: ActionFunctionArgs) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    if (!credentials["states"]) {
+      throw new Error("States selection is required field!");
+    }
+
+    // Perform state selection logic here
+    console.log("States selected:", credentials["states"]);
+
+    toast.success("States selected successfully!");
+    return redirect("/onboarding/payments");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while selecting states.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};

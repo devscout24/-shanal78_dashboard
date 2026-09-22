@@ -8,6 +8,7 @@ import {
   forgotPassword,
   login,
   register,
+  selectState,
   sendMessage,
   sendNewMessage,
   updatePassword,
@@ -27,7 +28,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
-import Onboarding from "./pages/onboarding/state";
+import State from "./pages/onboarding/state";
 import UserManagement from "./pages/user-management";
 import Billing from "./pages/user-management/billing";
 import Notification from "./pages/user-management/notification";
@@ -99,7 +100,12 @@ const router = createBrowserRouter([
           },
           {
             path: "state",
-            element: <Onboarding />,
+            element: <State />,
+            action: selectState,
+          },
+          {
+            path: "payments",
+            element: <div>Payments</div>,
           },
         ],
       },

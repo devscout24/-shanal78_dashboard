@@ -5,38 +5,39 @@ import * as z from "zod";
 
 const formSchema = z
   .object({
-    package: z.object({
-      id: z.number(),
-      name: z.string(),
-      price: z.string(),
-      stateLimit: z.number(),
-    }),
-    states: z.array(z.string()).optional(),
+    package: z
+      .object({
+        id: z.number(),
+        name: z.string(),
+        price: z.number(),
+        stateLimit: z.number(),
+      })
+      .nullable(), // ← allow null to represent "not selected"
+    states: z.array(z.string()),
     addOn: z.boolean().optional(),
   })
   .refine(
     (data) => {
-      // If states isn't provided, it's valid (or handle as needed)
-      if (!data.states) return true;
-
-      // Check if selected states exceed the package limit
+      // If states are selected but no package is chosen, block it
+      if (!data.package && data.states.length > 0) return false;
+      return true;
+    },
+    {
+      message: "Please select a package before choosing states.",
+      path: ["states"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (!data.package) return true;
       return data.states.length <= data.package.stateLimit;
     },
     {
       message:
         "Please select states within the allowed limit for the chosen package.",
-      // This points the error message directly to the 'states' field in react-hook-form
       path: ["states"],
     },
   );
-
-const STATE_PRICES: Record<string, number> = {
-  Texas: 100,
-  California: 100,
-  "New York": 100,
-  Florida: 100,
-  Georgia: 125,
-};
 
 export default function useSelectStateForm() {
   const submit = useSubmit();
@@ -44,9 +45,20 @@ export default function useSelectStateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      package: {},
+      package: null, // ← null instead of {}
+      states: [],
+      addOn: false,
     },
   });
+
+  const selectedPackage = useWatch({
+    control: form.control,
+    name: "package",
+    defaultValue: null,
+  });
+
+  const isPackageSelected =
+    selectedPackage !== null && selectedPackage?.id !== undefined;
 
   const selectedStates =
     useWatch({
@@ -55,29 +67,19 @@ export default function useSelectStateForm() {
       defaultValue: [],
     }) ?? [];
 
-  const addOn = useWatch({
-    control: form.control,
-    name: "addOn",
-    defaultValue: false,
-  });
-
-  const stateTotal = selectedStates.reduce(
-    (sum, s) => sum + (STATE_PRICES[s] ?? 0),
-    0,
-  );
-
-  const addOnTotal = addOn ? 500 : 0; // Assuming add-on costs $50
-
-  const total = stateTotal + addOnTotal;
-
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);
-    submit({ quizTimedOut: true }, { action: "/end-quiz", method: "post" });
+    submit(
+      { quizTimedOut: true },
+      { action: "/onboarding/state", method: "post" },
+    );
   }
 
   return {
     form,
     onSubmit,
-    total,
+    selectedStates,
+    selectedPackage,
+    isPackageSelected,
   };
 }
