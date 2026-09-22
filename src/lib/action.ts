@@ -44,8 +44,6 @@ export const login = async ({ request }: ActionFunctionArgs) => {
 };
 
 export const register = async ({ request }: ActionFunctionArgs) => {
-  const url = new URL(request.url);
-  const searchTerm = url.searchParams.get("from") || "/";
   try {
     const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
@@ -71,7 +69,7 @@ export const register = async ({ request }: ActionFunctionArgs) => {
 
     // Redirect to the previous route or a default route
     toast.success("Registration successful!");
-    return redirect(`${searchTerm}`);
+    return redirect("/onboarding/state");
   } catch (error) {
     const errorMessage =
       error instanceof Error
