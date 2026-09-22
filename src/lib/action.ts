@@ -311,3 +311,32 @@ export const selectState = async ({ request }: ActionFunctionArgs) => {
     return toast.error(errorMessage);
   }
 };
+
+export const processPayment = async ({ request }: ActionFunctionArgs) => {
+  try {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
+
+    console.log(
+      "🚀 ~ action.ts:316 ~ paymentMethod ~ credentials:",
+      credentials,
+    );
+
+    if (!credentials["cardNumber"]) {
+      throw new Error("Card number is required field!");
+    }
+
+    // Perform payment method logic here
+    console.log("Payment method submitted:", credentials);
+
+    toast.success("Payment method submitted successfully!");
+    return redirect("/onboarding/terms");
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "An error occurred while submitting the payment method.";
+    console.error(error);
+    return toast.error(errorMessage);
+  }
+};

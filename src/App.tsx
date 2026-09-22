@@ -7,6 +7,7 @@ import {
   changePlan,
   forgotPassword,
   login,
+  processPayment,
   register,
   selectState,
   sendMessage,
@@ -28,6 +29,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
+import Payments from "./pages/onboarding/payments";
 import State from "./pages/onboarding/state";
 import UserManagement from "./pages/user-management";
 import Billing from "./pages/user-management/billing";
@@ -105,7 +107,12 @@ const router = createBrowserRouter([
           },
           {
             path: "payments",
-            element: <div>Payments</div>,
+            element: <Payments />,
+            action: processPayment,
+          },
+          {
+            path: "terms",
+            element: <div>Terms</div>,
           },
         ],
       },
