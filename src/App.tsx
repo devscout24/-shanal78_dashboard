@@ -31,6 +31,7 @@ import Home from "./pages/dashboard/home";
 import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
 import Payments from "./pages/onboarding/payments";
 import State from "./pages/onboarding/state";
+import Terms from "./pages/onboarding/terms";
 import UserManagement from "./pages/user-management";
 import Billing from "./pages/user-management/billing";
 import Notification from "./pages/user-management/notification";
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
           },
           {
             path: "terms",
-            element: <div>Terms</div>,
+            element: <Terms />,
           },
         ],
       },
