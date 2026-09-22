@@ -69,10 +69,7 @@ export default function useSelectStateForm() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);
-    submit(
-      { quizTimedOut: true },
-      { action: "/onboarding/state", method: "post" },
-    );
+    submit(data, { action: "/onboarding/state", method: "post" });
   }
 
   return {

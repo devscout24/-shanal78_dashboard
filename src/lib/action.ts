@@ -291,6 +291,8 @@ export const selectState = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const credentials = Object.fromEntries(formData);
 
+    console.log("🚀 ~ action.ts:294 ~ selectState ~ credentials:", credentials);
+
     if (!credentials["states"]) {
       throw new Error("States selection is required field!");
     }
