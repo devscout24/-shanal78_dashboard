@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router";
 
-export default function useQueryParams() {
+export default function useSearchQuery() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const removeQuery = (queryIds: string[]) => {

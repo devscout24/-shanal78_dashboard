@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import RemoveState from "./remove-state";
 
 export default function StateCoverage() {
   return (
@@ -22,9 +23,7 @@ export default function StateCoverage() {
           {states.map((state) => (
             <li className="flex items-center justify-between border-[#E9EAEB] py-3 text-sm font-medium not-last:border-b">
               <span>{state}</span>
-              <button className="cursor-pointer text-[13px] text-red-500">
-                Remove
-              </button>
+              <RemoveState />
             </li>
           ))}
         </ul>
