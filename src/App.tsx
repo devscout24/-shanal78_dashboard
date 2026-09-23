@@ -28,6 +28,7 @@ import Signup from "./pages/auth/signup";
 import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
+import MySubscription from "./pages/dashboard/my-subscription";
 import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
 import Payments from "./pages/onboarding/payments";
 import State from "./pages/onboarding/state";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             action: sendMessage,
           },
         ],
+      },
+      {
+        path: "my-subscription",
+        element: <MySubscription />,
       },
       {
         path: "user-management",
