@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import CancelSubscription from "./cancel-subscription";
 import RemoveState from "./remove-state";
 
 export default function StateCoverage() {
@@ -30,10 +31,7 @@ export default function StateCoverage() {
       </div>
 
       <p className="text-[13px] text-[#899AB3]">
-        Want to cancel instead?{" "}
-        <a href="#" className="text-red-500 hover:underline">
-          Cancel subscription
-        </a>
+        Want to cancel instead? <CancelSubscription />
       </p>
     </>
   );
