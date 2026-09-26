@@ -29,6 +29,7 @@ import Compliance from "./pages/dashboard/compliance";
 import Chat from "./pages/dashboard/compliance/chat";
 import Home from "./pages/dashboard/home";
 import MySubscription from "./pages/dashboard/my-subscription";
+import UserManagement from "./pages/dashboard/user-management";
 import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
 import Payments from "./pages/onboarding/payments";
 import State from "./pages/onboarding/state";
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "my-subscription",
         element: <MySubscription />,
+      },
+      {
+        path: "user-management",
+        element: <UserManagement />,
       },
       {
         path: "settings-preferences",
