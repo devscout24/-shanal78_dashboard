@@ -1,3 +1,5 @@
+import LimitReached from "./limit-reached";
+
 export default function InviteMember() {
   return (
     <div className="flex items-center justify-between">
@@ -8,9 +10,7 @@ export default function InviteMember() {
         </p>
       </div>
 
-      <button className="cursor-pointer rounded-[8px] bg-[#99999E] px-4.5 py-2.5 text-sm font-medium text-white">
-        + Invite member (seat limit reached)
-      </button>
+      <LimitReached />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import ChangeRole from "./change-role";
 
 export default function Members() {
   return (
@@ -19,9 +20,9 @@ export default function Members() {
             >
               {member.status}
             </p>
-            <button className="cursor-pointer rounded-full px-3.5 py-3 text-[13px] font-medium text-[#899AB3]">
-              Change role
-            </button>
+
+            <ChangeRole />
+
             <button className="cursor-pointer rounded-full px-3.5 py-3 text-[13px] font-medium text-[#D13333]">
               Remove
             </button>
