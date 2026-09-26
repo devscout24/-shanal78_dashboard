@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 import DashboardLayout from "../dashboard/dashboard-layout";
 import Sidebar from "./_components/sidebar";
 
-export default function UserManagement() {
+export default function SettingsPreferences() {
   return (
     <DashboardLayout>
       <AppSidebar>

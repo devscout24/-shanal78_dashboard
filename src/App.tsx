@@ -33,11 +33,11 @@ import OnBoardingLayout from "./pages/onboarding/on-boarding-layout";
 import Payments from "./pages/onboarding/payments";
 import State from "./pages/onboarding/state";
 import Terms from "./pages/onboarding/terms";
-import UserManagement from "./pages/user-management";
-import Billing from "./pages/user-management/billing";
-import Notification from "./pages/user-management/notification";
-import Password from "./pages/user-management/password";
-import Profile from "./pages/user-management/profile";
+import SettingsPreferences from "./pages/settings-preferences";
+import Billing from "./pages/settings-preferences/billing";
+import Notification from "./pages/settings-preferences/notification";
+import Password from "./pages/settings-preferences/password";
+import Profile from "./pages/settings-preferences/profile";
 
 const router = createBrowserRouter([
   {
@@ -69,8 +69,8 @@ const router = createBrowserRouter([
         element: <MySubscription />,
       },
       {
-        path: "user-management",
-        element: <UserManagement />,
+        path: "settings-preferences",
+        element: <SettingsPreferences />,
         children: [
           {
             index: true,

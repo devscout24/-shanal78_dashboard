@@ -35,18 +35,18 @@ export default function Sidebar() {
 const menu = [
   {
     title: "Profile",
-    url: "/user-management/profile",
+    url: "/settings-preferences/profile",
   },
   {
     title: "Password",
-    url: "/user-management/password",
+    url: "/settings-preferences/password",
   },
   {
     title: "Billing",
-    url: "/user-management/billing",
+    url: "/settings-preferences/billing",
   },
   {
     title: "Notifications",
-    url: "/user-management/notifications",
+    url: "/settings-preferences/notifications",
   },
 ];
