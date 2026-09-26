@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import AddState from "./add-state";
 import CancelSubscription from "./cancel-subscription";
 import RemoveState from "./remove-state";
 
@@ -14,10 +14,7 @@ export default function StateCoverage() {
             </p>
           </div>
 
-          <Button className="from-primary to-secondary h-9 w-[111.797px] cursor-pointer rounded-[8px] bg-linear-to-r px-4.5 font-mono text-sm leading-5 font-semibold">
-            <span>+</span>
-            <span>Add state</span>
-          </Button>
+          <AddState />
         </div>
 
         <ul className="mt-4">
