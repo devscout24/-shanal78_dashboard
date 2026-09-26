@@ -1,3 +1,5 @@
+import ChangePlan from "./change-plan";
+
 export default function CurrentPlan() {
   return (
     <div className="rounded-[12px] border border-[#E9EAEB] p-6">
@@ -11,9 +13,8 @@ export default function CurrentPlan() {
             Renews on Sep 22, 2026 · Billed monthly
           </p>
         </div>
-        <button className="rounded-[8px] border-2 border-[#E9EAEB] px-4.5 py-2.5 text-sm font-medium text-[#101828]">
-          Upgrade / Downgrade plan
-        </button>
+
+        <ChangePlan />
       </div>
 
       <div className="mt-4 space-y-4">
