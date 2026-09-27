@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import ChangeRole from "./change-role";
+import RemoveMember from "./remove-member";
 
 export default function Members() {
   return (
@@ -23,9 +24,7 @@ export default function Members() {
 
             <ChangeRole member={member} />
 
-            <button className="cursor-pointer rounded-full px-3.5 py-3 text-[13px] font-medium text-[#D13333]">
-              Remove
-            </button>
+            <RemoveMember member={member} />
           </div>
         </div>
       ))}
