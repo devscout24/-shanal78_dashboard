@@ -21,7 +21,7 @@ export default function Members() {
               {member.status}
             </p>
 
-            <ChangeRole />
+            <ChangeRole member={member} />
 
             <button className="cursor-pointer rounded-full px-3.5 py-3 text-[13px] font-medium text-[#D13333]">
               Remove

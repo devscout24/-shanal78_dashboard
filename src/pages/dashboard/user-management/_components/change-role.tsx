@@ -22,7 +22,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Controller } from "react-hook-form";
 import useChangeRoleForm from "./use-change-role-form";
 
-export default function ChangeRole() {
+type ChangeRoleProps = {
+  member: {
+    name: string;
+    email: string;
+    status: string;
+  };
+};
+
+export default function ChangeRole({ member }: ChangeRoleProps) {
   const { form, onSubmit } = useChangeRoleForm();
 
   return (
@@ -40,24 +48,27 @@ export default function ChangeRole() {
             <Avatar className="size-10 bg-[#E9EAEB]">
               <AvatarImage src="" />
               <AvatarFallback className="text-[13px] font-bold text-[#101828]">
-                JN
+                {member.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
               </AvatarFallback>
             </Avatar>
 
             <div>
               <h4 className="text-[15px] font-bold text-[#101828]">
-                Jordan Lee
+                {member.name}
               </h4>
-              <p className="text-xs text-[#899AB3]">jordan@a2hr.com</p>
+              <p className="text-xs text-[#899AB3]">{member.email}</p>
             </div>
           </div>
 
           <DialogTitle className="text-lg font-bold text-[#101828]">
-            Change role for Jordan Lee
+            Change role for {member.name}
           </DialogTitle>
           <DialogDescription className="text-sm text-[#899AB3]">
-            Choose what Jordan can do in your A2HR account. The change takes
-            effect right away.
+            Choose what {member.name} can do in your A2HR account. The change
+            takes effect right away.
           </DialogDescription>
         </DialogHeader>
         <form
@@ -113,7 +124,7 @@ export default function ChangeRole() {
         </form>
 
         <DialogDescription className="rounded-[8px] bg-[#F5F7FA] px-3.5 py-3 text-[13px] font-medium text-[#101828]">
-          Jordan Lee: Member → Admin
+          {member.name}: Member → Admin
         </DialogDescription>
 
         <DialogFooter>
