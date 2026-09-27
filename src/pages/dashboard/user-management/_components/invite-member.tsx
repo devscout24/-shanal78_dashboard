@@ -1,4 +1,4 @@
-import LimitReached from "./limit-reached";
+import InviteMemberForm from "./invite-member-form";
 
 export default function InviteMember() {
   return (
@@ -9,8 +9,9 @@ export default function InviteMember() {
           Team plan · 4 / 4 users · manage roles & access
         </p>
       </div>
-
-      <LimitReached />
+      <InviteMemberForm />
+      {/* If team member reached limit, show limit reached message */}
+      {/* <LimitReached /> */}
     </div>
   );
 }
