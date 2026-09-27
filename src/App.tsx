@@ -2,6 +2,8 @@ import HydrateFallback from "@/components/shared/hydrate-fallback";
 import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { Toaster } from "sonner";
+import NotFoundPage from "./components/not-found-page";
+import RouteError from "./components/route-error";
 import Root from "./components/shared/root";
 import {
   changePlan,
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     hydrateFallbackElement: <HydrateFallback />,
-    errorElement: <div>error</div>,
+    errorElement: <RouteError />,
     loader: loadUser,
     children: [
       {
@@ -162,7 +164,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <div>404</div>,
+    element: <NotFoundPage />,
   },
 ]);
 
