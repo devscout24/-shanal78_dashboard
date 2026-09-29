@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore } from "redux-persist";
-import { baseApi } from "./api";
+import baseApi from "./api";
 import persistedReducer from "./rootReducer";
 
 export const store = configureStore({
@@ -10,7 +10,8 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
       },
-    }).concat(baseApi.middleware),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).concat(baseApi.middleware as any),
 });
 
 export const persistor = persistStore(store);

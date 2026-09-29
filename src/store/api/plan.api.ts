@@ -1,7 +1,7 @@
 import type { SubscriptionConfigResponseDto } from "@/types/plan";
-import { baseApi } from ".";
+import baseApi from "./index";
 
-export const authApi = baseApi.injectEndpoints({
+export const planApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPlans: builder.query<SubscriptionConfigResponseDto, void>({
       query: () => "customer/plans",
@@ -10,4 +10,4 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetPlansQuery, useLazyGetPlansQuery } = authApi;
+export const { useGetPlansQuery, useLazyGetPlansQuery } = planApi;

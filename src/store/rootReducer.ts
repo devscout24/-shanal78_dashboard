@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storageModule from "redux-persist/lib/storage";
 const storage = storageModule.default ?? storageModule;
-import { baseApi } from "./api";
+import baseApi from "./api";
 import authSlice from "./slices/auth.slice";
 
 const persistConfig = {
