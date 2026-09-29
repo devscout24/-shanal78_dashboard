@@ -7,7 +7,24 @@ export const planApi = baseApi.injectEndpoints({
       query: () => "customer/plans",
       providesTags: ["PLANS"],
     }),
+
+    sendLead: builder.mutation<
+      { lead_id: string; received_at: string },
+      {
+        name: string;
+        email: string;
+        company: string;
+        users: string;
+        message: string;
+      }
+    >({
+      query: (body) => ({
+        url: "customer/enterprise-lead",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetPlansQuery, useLazyGetPlansQuery } = planApi;
+export const { useGetPlansQuery, useSendLeadMutation } = planApi;

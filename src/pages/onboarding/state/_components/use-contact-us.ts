@@ -1,6 +1,6 @@
+import { useSendLeadMutation } from "@/store/api/plan.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSubmit } from "react-router";
 import z from "zod";
 
 const formSchema = z.object({
@@ -14,7 +14,7 @@ const formSchema = z.object({
 });
 
 export default function useContactUsForm() {
-  const submit = useSubmit();
+  const [sendLead] = useSendLeadMutation();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,8 +28,15 @@ export default function useContactUsForm() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
-    submit(data, { action: "/onboarding/state", method: "post" });
+    console.log("🚀 ~ use-contact-us.ts:32 ~ onSubmit ~ data:", data);
+
+    sendLead({
+      name: data.name,
+      email: data.email,
+      company: data.company,
+      users: data.estimateUsers,
+      message: data.message,
+    });
   }
 
   return {

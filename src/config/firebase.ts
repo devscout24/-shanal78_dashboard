@@ -15,4 +15,4 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 export const auth = getAuth(app);
 
-// auth.tenantId = import.meta.env.VITE_FIREBASE_TENANT_ID;
+auth.tenantId = import.meta.env.VITE_FIREBASE_TENANT_ID;

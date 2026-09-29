@@ -40,7 +40,13 @@ export default function ContactUs() {
         }
       />
       <DialogContent className="bg-[#F7FBFE] p-10">
-        <form id="contact-us-form" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          id="form-contact-us"
+          onSubmit={(e) => {
+            e.stopPropagation();
+            form.handleSubmit(onSubmit)(e);
+          }}
+        >
           <DialogHeader>
             <DialogTitle className="text-[26px] font-semibold text-[#10172A]">
               Let's get you set up
