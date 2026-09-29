@@ -5,6 +5,7 @@ import type { PlanDto, YearlyDiscountDto } from "@/types/plan";
 import { Check } from "lucide-react";
 import { Controller } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import ContactUs from "./contact-us";
 import useOnboardingForm from "./use-state-form";
 
 export default function Packages({
@@ -115,25 +116,32 @@ export default function Packages({
                   </div>
 
                   {/* Button stays neatly pushed to the bottom */}
-                  <Button
-                    className={cn(
-                      "mt-6 h-10 w-full cursor-pointer rounded-xl border border-black bg-transparent text-sm font-semibold text-black",
-                      {
-                        "ring-2 ring-white ring-offset-2":
-                          field.value?.id === plan.id,
-                      },
-                    )}
-                    onClick={() =>
-                      field.onChange({
-                        id: plan.id,
-                        name: plan.name,
-                        price: plan.monthly_price,
-                        stateLimit: plan.state_cap,
-                      })
-                    }
-                  >
-                    {field.value?.id === plan.id ? "Selected ✓" : "Select plan"}
-                  </Button>
+
+                  {plan.id === "enterprise" ? (
+                    <ContactUs />
+                  ) : (
+                    <Button
+                      className={cn(
+                        "mt-6 h-10 w-full cursor-pointer rounded-xl border border-black bg-transparent text-sm font-semibold text-black",
+                        {
+                          "ring-2 ring-white ring-offset-2":
+                            field.value?.id === plan.id,
+                        },
+                      )}
+                      onClick={() =>
+                        field.onChange({
+                          id: plan.id,
+                          name: plan.name,
+                          price: plan.monthly_price,
+                          stateLimit: plan.state_cap,
+                        })
+                      }
+                    >
+                      {field.value?.id === plan.id
+                        ? "Selected ✓"
+                        : "Select plan"}
+                    </Button>
+                  )}
                 </div>
               ))}
             </div>
