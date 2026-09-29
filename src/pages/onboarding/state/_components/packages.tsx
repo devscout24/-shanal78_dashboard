@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
-import type { PlanDto, YearlyDiscountDto } from "@/types/plan";
+import { useGetPlansQuery } from "@/store/api/plan.api";
 import { Check } from "lucide-react";
 import { Controller } from "react-hook-form";
-import { useLoaderData } from "react-router";
 import ContactUs from "./contact-us";
 import useOnboardingForm from "./use-state-form";
 
@@ -13,10 +12,27 @@ export default function Packages({
 }: {
   form: ReturnType<typeof useOnboardingForm>["form"];
 }) {
-  const { plans, yearly_discount } = useLoaderData<{
-    plans: PlanDto[];
-    yearly_discount: YearlyDiscountDto;
-  }>();
+  const { isError, isLoading, data } = useGetPlansQuery();
+
+  if (isLoading) {
+    return (
+      <div className="mt-10 flex items-center justify-center rounded-2xl border-2 border-[#E5EBF2] bg-white p-6">
+        <p className="text-sm font-medium text-[#475467]">Loading plans...</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="mt-10 flex items-center justify-center rounded-2xl border-2 border-[#E5EBF2] bg-white p-6">
+        <p className="text-sm font-medium text-[#475467]">
+          Error loading plans. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  const { plans, yearly_discount } = data || {};
 
   if (!plans || plans.length === 0) {
     return (
@@ -84,7 +100,7 @@ export default function Packages({
 
                     <p className="text-[11.5px] font-medium text-[#00B5C6] capitalize">
                       {plan.yearly_price
-                        ? `${plan.yearly_price}/yr (${yearly_discount.months_free} months free)`
+                        ? `${plan.yearly_price}/yr (${yearly_discount?.months_free} months free)`
                         : "contact us for pricing"}
                     </p>
                     <p className="text-[13px] font-medium text-[#475467] capitalize">

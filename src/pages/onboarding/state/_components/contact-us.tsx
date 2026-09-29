@@ -28,19 +28,19 @@ export default function ContactUs() {
   const { form, onSubmit } = useContactUsForm();
   return (
     <Dialog>
-      <form id="contact-us-form" onSubmit={form.handleSubmit(onSubmit)}>
-        <DialogTrigger
-          render={
-            <Button
-              type="button"
-              variant="outline"
-              className="mt-6 h-10 w-full cursor-pointer rounded-xl border border-black bg-transparent text-sm font-semibold text-black ring"
-            >
-              Contact Us
-            </Button>
-          }
-        />
-        <DialogContent className="bg-[#F7FBFE] p-10">
+      <DialogTrigger
+        render={
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-6 h-10 w-full cursor-pointer rounded-xl border border-black bg-transparent text-sm font-semibold text-black ring"
+          >
+            Contact Us
+          </Button>
+        }
+      />
+      <DialogContent className="bg-[#F7FBFE] p-10">
+        <form id="contact-us-form" onSubmit={form.handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle className="text-[26px] font-semibold text-[#10172A]">
               Let's get you set up
@@ -210,8 +210,8 @@ export default function ContactUs() {
               "Thanks — we'll be in touch within 1 business day."
             </p>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

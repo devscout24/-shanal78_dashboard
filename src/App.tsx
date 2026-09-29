@@ -1,4 +1,5 @@
 import HydrateFallback from "@/components/shared/hydrate-fallback";
+import { Provider } from "react-redux";
 import { createBrowserRouter, Navigate } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { Toaster } from "sonner";
@@ -42,6 +43,7 @@ import Billing from "./pages/settings-preferences/billing";
 import Notification from "./pages/settings-preferences/notification";
 import Password from "./pages/settings-preferences/password";
 import Profile from "./pages/settings-preferences/profile";
+import { store } from "./store";
 
 const router = createBrowserRouter([
   {
@@ -172,10 +174,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <RouterProvider router={router} />
       <Toaster richColors />
-    </>
+    </Provider>
   );
 }
 
