@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
+import type { AddonDto } from "@/types/plan";
 import { Check, Clock, TriangleAlert, UsersRound, X } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { useLoaderData } from "react-router";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import useOnboardingForm from "./use-state-form";
 
@@ -24,6 +26,10 @@ export default function StateForm({
     x: number;
     y: number;
   } | null>(null);
+
+  const { addons } = useLoaderData<{
+    addons: AddonDto[];
+  }>();
 
   return (
     <div>
@@ -195,46 +201,49 @@ export default function StateForm({
             <h2 className="text-lg font-semibold text-[#10172A]">Add-ons</h2>
 
             <div className="w-full rounded-xl border-2 border-[#E5EBF2] bg-[#F8FAFC] p-4">
-              <div>
-                <Field orientation="horizontal">
-                  <Label
-                    htmlFor="terms-checkbox"
-                    className="flex w-full cursor-pointer justify-between"
-                  >
-                    <span className="flex items-center gap-4">
-                      <Checkbox
-                        onCheckedChange={field.onChange}
-                        checked={field.value}
-                        name="addOn"
-                        id="terms-checkbox"
-                        className="size-5 border-[#00B5C6] checked:bg-[#00B5C6] focus:ring-[#00B5C6] data-[state=checked]:border-[#00B5C6]"
-                      />
-                      <span>
-                        <span className="flex w-full items-center gap-1">
-                          <UsersRound className="text-secondary size-3.75" />
-                          <span className="text-sm font-semibold">
-                            HRBP add-on
+              {addons.map((addon) => (
+                <div key={addon.id} className="mb-4 last:mb-0">
+                  <Field orientation="horizontal">
+                    <Label
+                      htmlFor="terms-checkbox"
+                      className="flex w-full cursor-pointer justify-between"
+                    >
+                      <span className="flex items-center gap-4">
+                        <Checkbox
+                          onCheckedChange={field.onChange}
+                          checked={field.value}
+                          name="addOn"
+                          id="terms-checkbox"
+                          className="size-5 border-[#00B5C6] checked:bg-[#00B5C6] focus:ring-[#00B5C6] data-[state=checked]:border-[#00B5C6]"
+                        />
+                        <span>
+                          <span className="flex w-full items-center gap-1">
+                            <UsersRound className="text-secondary size-3.75" />
+                            <span className="text-sm font-semibold">
+                              {addon.name}
+                            </span>
+                          </span>
+                          <span className="text-xs font-medium text-[#475467]">
+                            {addon.description}
                           </span>
                         </span>
-                        <span className="text-xs font-medium text-[#475467]">
-                          Dedicated HR business partner support for your
-                          account.
-                        </span>
                       </span>
-                    </span>
 
-                    <span className="flex flex-col items-end gap-1">
-                      <span className="text-sm font-semibold">$500/mo</span>
-                      <span className="flex items-center gap-1 rounded-full bg-[#E6F8F9] px-2 py-0.75">
-                        <Clock className="text-secondary size-3" />
-                        <span className="text-[10.5px] font-semibold text-[#00B5C6]">
-                          Limited time only
+                      <span className="flex flex-col items-end gap-1">
+                        <span className="text-sm font-semibold">
+                          ${addon.monthly_price}/mo
+                        </span>
+                        <span className="flex items-center gap-1 rounded-full bg-[#E6F8F9] px-2 py-0.75">
+                          <Clock className="text-secondary size-3" />
+                          <span className="text-[10.5px] font-semibold text-[#00B5C6]">
+                            {addon.badge}
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </Label>
-                </Field>
-              </div>
+                    </Label>
+                  </Field>
+                </div>
+              ))}
             </div>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
