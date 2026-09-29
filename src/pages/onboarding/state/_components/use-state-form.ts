@@ -7,7 +7,7 @@ const formSchema = z
   .object({
     package: z
       .object({
-        id: z.number(),
+        id: z.string(),
         name: z.string(),
         price: z.number(),
         stateLimit: z.number(),

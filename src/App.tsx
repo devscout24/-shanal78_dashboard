@@ -22,6 +22,7 @@ import {
   loadUser,
   loginWithGoogle,
   messages,
+  plans,
 } from "./lib/loader";
 import AuthLayout from "./pages/auth/auth-layout";
 import ForgotPassword from "./pages/auth/forgot-password";
@@ -117,6 +118,7 @@ const router = createBrowserRouter([
             path: "state",
             element: <State />,
             action: selectState,
+            loader: plans,
           },
           {
             path: "payments",

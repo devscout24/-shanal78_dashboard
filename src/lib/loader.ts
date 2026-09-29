@@ -1,6 +1,7 @@
 import { auth } from "@/config/firebase";
 import type { Invoice } from "@/types/billing";
 import type { IMessage } from "@/types/messages";
+import type { SubscriptionConfigResponseDto } from "@/types/plan";
 import { faker } from "@faker-js/faker";
 import {
   browserLocalPersistence,
@@ -11,6 +12,8 @@ import {
 } from "firebase/auth";
 import { redirect, type LoaderFunctionArgs } from "react-router";
 import { toast } from "sonner";
+
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export const loadUser = async () => {
   return new Promise((resolve, reject) => {
@@ -118,5 +121,37 @@ export const billingHistory = async (): Promise<Invoice[]> => {
   } catch (error) {
     console.error(error);
     return [];
+  }
+};
+
+export const plans = async (): Promise<SubscriptionConfigResponseDto> => {
+  try {
+    const response = await fetch(`${baseUrl}/customer/plans`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch plans");
+    }
+    const data = await response.json();
+
+    return data as SubscriptionConfigResponseDto;
+  } catch (error) {
+    console.error(error);
+    return {
+      addons: [],
+      plans: [],
+      proration_policy: {
+        prorate_new_signup: false,
+        prorate_plan_change: null,
+      },
+      trial_policy: {
+        enabled: false,
+      },
+      yearly_discount: {
+        approx_pct: 0,
+        display: "",
+        kind: "",
+        months_free: 0,
+      },
+    };
   }
 };
