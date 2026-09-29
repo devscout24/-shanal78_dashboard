@@ -2,11 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
-import type { AddonDto } from "@/types/plan";
+import { useGetPlansQuery } from "@/store/api/plan.api";
 import { Check, Clock, TriangleAlert, UsersRound, X } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { useLoaderData } from "react-router";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import useOnboardingForm from "./use-state-form";
 
@@ -27,9 +26,37 @@ export default function StateForm({
     y: number;
   } | null>(null);
 
-  const { addons } = useLoaderData<{
-    addons: AddonDto[];
-  }>();
+  const { isError, isLoading, data } = useGetPlansQuery();
+
+  if (isLoading) {
+    return (
+      <div className="mt-10 flex items-center justify-center rounded-2xl border-2 border-[#E5EBF2] bg-white p-6">
+        <p className="text-sm font-medium text-[#475467]">Loading plans...</p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="mt-10 flex items-center justify-center rounded-2xl border-2 border-[#E5EBF2] bg-white p-6">
+        <p className="text-sm font-medium text-[#475467]">
+          Error loading plans. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  const { addons } = data || {};
+
+  if (!addons || addons.length === 0) {
+    return (
+      <div className="mt-10 flex items-center justify-center rounded-2xl border-2 border-[#E5EBF2] bg-white p-6">
+        <p className="text-sm font-medium text-[#475467]">
+          No add-ons available at the moment. Please check back later.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
