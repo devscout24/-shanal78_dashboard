@@ -7,7 +7,7 @@ export default createApi({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
     prepareHeaders: async (headers) => {
       await auth.authStateReady();
-      const token = await auth.currentUser?.getIdToken();
+      const token = await auth.currentUser?.getIdToken(true);
 
       console.log("🚀 ~ index.ts:12 ~ token:", token);
 
